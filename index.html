@@ -1,4 +1,8 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ntokozo & Connie Engagement</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Figtree:wght@400;500;600&display=swap">
 <style>
@@ -40,8 +44,9 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(24px, 5vw, 64px); align-items: center; }
 .hero h1 { font-size: clamp(52px, 11vw, 112px); font-style: italic; letter-spacing: -.02em; }
 .hero h1 span { display: block; font-style: normal; font-size: .38em; letter-spacing: .02em; margin-block: .12em; color: var(--gold); }
-.hero .sub { font-family: var(--display); font-size: clamp(22px, 3.4vw, 32px); margin: 22px 0 8px; }
-.hero .when { color: var(--muted); font-size: 18px; margin: 0 0 26px; }
+.hero .invite { font-family: var(--display); font-size: clamp(22px, 3.6vw, 32px); line-height: 1.25; margin: 0 0 18px; }
+.hero .invite strong { display: block; font-weight: 600; color: var(--blue); }
+.hero .when { color: var(--muted); font-size: 18px; margin: 22px 0 26px; }
 .btn { display: inline-block; background: var(--blue); color: #fff; padding: 14px 26px; text-decoration: none; font-weight: 600; letter-spacing: .04em; border: 2px solid var(--blue); cursor: pointer; font: inherit; font-weight: 600; }
 .btn:hover { background: var(--night); border-color: var(--night); }
 .btn.ghost { background: transparent; color: var(--blue); }
@@ -70,7 +75,9 @@ p { margin: 0 0 1em; max-width: 62ch; }
 .pelekani .lead { font-family: var(--display); font-size: clamp(21px, 3vw, 27px); line-height: 1.3; margin: 18px 0; }
 .callout { border: 1.5px solid var(--gold); padding: 20px 22px; margin-top: 24px; }
 .callout h3 { margin: 0 0 6px; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
-.callout p { margin: 0; }
+.callout p { margin: 0 0 16px; }
+.btn.gold { background: var(--gold); border-color: var(--gold); color: var(--night); }
+.btn.gold:hover { background: #fff; border-color: #fff; color: var(--night); }
 .pelekani .photo { border-color: var(--gold); }
 
 /* dress */
@@ -121,14 +128,15 @@ footer p { margin-inline: auto; }
 }
 </style>
 
+</head>
+<body>
 <div class="band" aria-hidden="true"></div>
 
 <header class="hero">
   <div class="wrap">
     <div>
-      <p class="eyebrow">You are invited to our</p>
+      <p class="invite">You are invited to our <strong>Engagement Celebration (Chinkhoswe)</strong></p>
       <h1>Ntokozo <span>&amp;</span> Connie</h1>
-      <p class="sub">Engagement Celebration</p>
       <p class="when" id="heroWhen">Date and time to be confirmed</p>
       <a class="btn" href="#rsvp">RSVP</a>
     </div>
@@ -172,6 +180,7 @@ footer p { margin-inline: auto; }
       <div class="callout">
         <h3>Not a cash-on-hand person?</h3>
         <p>Don't worry, we've got you covered! A gift registry is also available for those who would prefer to bless the newlyweds with a special gift.</p>
+        <a class="btn gold" href="https://www.myregistry.com/wedding-registry/ntokozo-vilane-and-connie-changwa-midrand-gauteng-/5523066" target="_blank" rel="noopener">View our gift registry</a>
       </div>
     </div>
   </div>
@@ -216,9 +225,7 @@ footer p { margin-inline: auto; }
         <div class="actions">
           <a class="btn" id="mailBtn" href="#rsvp">Submit RSVP</a>
         </div>
-        <div class="sendto">
-          <p>Your RSVP message will be prepared for you to copy. Please send it privately to the couple using the contact details on your personal invitation.</p>
-        </div>
+        <p class="sendto">Submitting opens an email with your answer ready to send. Press send to complete your RSVP. If nothing opens, please let Ntokozo or Connie know your answer directly.</p>
       </form>
     </div>
     <div class="photo"><img src="img/selfie.jpg" alt="Connie and Ntokozo smiling for a selfie in the sun" width="1000" height="1333" loading="lazy"></div>
@@ -238,7 +245,7 @@ footer p { margin-inline: auto; }
 /* Edit these two lines once the date and time are confirmed. */
 var EVENT_DATE = "Saturday, 12 December 2026";
 var EVENT_TIME = "12:30 PM";
-var TO = [];
+var TO = ["ntokozovilane84@gmail.com", "ciiciichan@gmail.com"];
 
 (function () {
   var $ = function (id) { return document.getElementById(id); };
@@ -258,7 +265,8 @@ var TO = [];
   }
   var subject = "RSVP: Ntokozo & Connie's Engagement Celebration";
   function refresh() {
-    $("mailBtn").setAttribute("href", "#rsvp");
+    var m = message();
+    $("mailBtn").setAttribute("href", "mailto:" + TO.join(",") + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(m));
   }
   ["name", "note", "yes", "no"].forEach(function (id) { $(id).addEventListener("input", refresh); $(id).addEventListener("change", refresh); });
   refresh();
@@ -269,22 +277,15 @@ var TO = [];
   }
   function flash(msg) { $("status").textContent = msg; }
   $("mailBtn").addEventListener("click", function (e) {
-    e.preventDefault();
-    if (!$("name").value.trim()) { flash("Please enter your full name first."); $("name").focus(); return; }
-    var text = message();
-    function showCopyFallback() {
-      window.prompt("Copy your RSVP message and send it privately to the couple:", text);
-      flash("Copy the RSVP message and send it privately to the couple.");
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function () {
-        flash("RSVP message copied. Send it privately to the couple.");
-      }, showCopyFallback);
-    } else { showCopyFallback(); }
+    if (!$("name").value.trim()) { e.preventDefault(); flash("Please enter your full name first."); $("name").focus(); return; }
+    flash("Your email app should open with your RSVP ready. Press send to finish.");
   });
   $("rsvpForm").addEventListener("submit", function (e) { e.preventDefault(); });
-
+  Array.prototype.forEach.call(document.querySelectorAll(".copy"), function (b) {
+    b.addEventListener("click", function () { copy(b.getAttribute("data-copy"), function (ok) { b.textContent = ok ? "Copied" : "Select and copy"; setTimeout(function () { b.textContent = "Copy"; }, 1800); }); });
+  });
 })();
 </script>
 
-</body></html>
+</body>
+</html>
