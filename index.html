@@ -226,28 +226,10 @@ footer p { margin-inline: auto; }
       <p class="eyebrow">RSVP</p>
       <h2>Will you be joining us?</h2>
       <span class="noplus">No plus ones, please</span>
-      <form id="rsvpForm" novalidate>
-        <div>
-          <label for="name">Your full name</label>
-          <input type="text" id="name" autocomplete="name" placeholder="As it appears on your invitation">
-        </div>
-        <fieldset>
-          <legend>Your answer</legend>
-          <div class="choices">
-            <label class="choice"><input type="radio" name="answer" id="yes" value="Joyfully accepts" checked><span>Joyfully accepts</span></label>
-            <label class="choice"><input type="radio" name="answer" id="no" value="Regretfully declines"><span>Regretfully declines</span></label>
-          </div>
-        </fieldset>
-        <div>
-          <label for="note">A note for the couple (optional)</label>
-          <textarea id="note" placeholder="Dietary needs, a blessing, or a few words for us"></textarea>
-        </div>
-        <p class="status" id="status" role="status"></p>
-        <div class="actions">
-          <a class="btn" id="mailBtn" href="#rsvp">Submit RSVP</a>
-        </div>
-        <p class="sendto">Submitting opens an email with your answer ready to send. Press send to complete your RSVP. If nothing opens, please let Ntokozo or Connie know your answer directly.</p>
-      </form>
+      <!--FORM-->
+      <iframe id="rsvpFrame" title="RSVP form" src="https://form.jotform.com/262857458055064" style="width:100%;height:560px;border:0" allowfullscreen></iframe>
+      <p class="sendto">Trouble with the form? <a href="https://form.jotform.com/262857458055064" target="_blank" rel="noopener">Open the RSVP form in a new page</a>.</p>
+      <!--/FORM-->
     </div>
     <div class="photo"><img src="img/selfie.jpg" alt="Connie and Ntokozo smiling for a selfie in the sun" width="1000" height="1333"></div>
   </div>
@@ -266,46 +248,11 @@ footer p { margin-inline: auto; }
 /* Edit these two lines once the date and time are confirmed. */
 var EVENT_DATE = "Saturday, 12 December 2026";
 var EVENT_TIME = "12:30 PM";
-var TO = ["ntokozovilane84@gmail.com", "ciiciichan@gmail.com"];
-
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var dateTxt = EVENT_DATE || "To be confirmed";
-  var timeTxt = EVENT_TIME || "To be confirmed";
-  $("dateText").textContent = dateTxt;
-  $("timeText").textContent = timeTxt;
-  dateTxt = "12 December 2026"; $("dateText").textContent = dateTxt;
-  if (EVENT_DATE) { $("heroWhen").textContent = EVENT_DATE + (EVENT_TIME ? " at " + EVENT_TIME : "") + " · Midrand"; }
-
-  function message() {
-    var name = $("name").value.trim() || "[your full name]";
-    var ans = $("yes").checked ? "joyfully accepts" : "regretfully declines";
-    var note = $("note").value.trim();
-    var m = "Hello Ntokozo and Connie,\n\n" + name + " " + ans + " the invitation to your Engagement Celebration at Belvedere Estate, Midrand.\n\nGuest attending: " + name + " (no plus ones).";
-    if (note) m += "\n\nNote: " + note;
-    return m + "\n\nWith love,\n" + name;
-  }
-  var subject = "RSVP: Ntokozo & Connie's Engagement Celebration";
-  function refresh() {
-    var m = message();
-    $("mailBtn").setAttribute("href", "mailto:" + TO.join(",") + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(m));
-  }
-  ["name", "note", "yes", "no"].forEach(function (id) { $(id).addEventListener("input", refresh); $(id).addEventListener("change", refresh); });
-  refresh();
-
-  function copy(text, done) {
-    function fallback() { done(false); }
-    try { navigator.clipboard.writeText(text).then(function () { done(true); }, fallback); } catch (e) { fallback(); }
-  }
-  function flash(msg) { $("status").textContent = msg; }
-  $("mailBtn").addEventListener("click", function (e) {
-    if (!$("name").value.trim()) { e.preventDefault(); flash("Please enter your full name first."); $("name").focus(); return; }
-    flash("Your email app should open with your RSVP ready. Press send to finish.");
-  });
-  $("rsvpForm").addEventListener("submit", function (e) { e.preventDefault(); });
-  Array.prototype.forEach.call(document.querySelectorAll(".copy"), function (b) {
-    b.addEventListener("click", function () { copy(b.getAttribute("data-copy"), function (ok) { b.textContent = ok ? "Copied" : "Select and copy"; setTimeout(function () { b.textContent = "Copy"; }, 1800); }); });
-  });
+  $("dateText").textContent = "12 December 2026";
+  $("timeText").textContent = EVENT_TIME;
+  $("heroWhen").textContent = EVENT_DATE + " at " + EVENT_TIME + " \u00b7 Midrand";
 })();
 
 /* Countdown to 12 December 2026, 12:30 (South Africa, UTC+2) */
